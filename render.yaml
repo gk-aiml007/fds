@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: python-experiments
+    env: static
+    buildCommand: ''
+    staticPublishPath: .

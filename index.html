@@ -122,13 +122,38 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk.stem import PorterStemmer, WordNetLemmatizer
 from nltk import pos_tag
-nltk.download('punkt_tab'); nltk.download('stopwords'); nltk.download('wordnet'); nltk.download('averaged_perceptron_tagger_eng')
-text = 'The striped bats are hanging on their feet for best'
-tokens = word_tokenize(text); print('Original Tokens:', tokens)
-filtered = [w for w in tokens if w.lower() not in set(stopwords.words('english'))]; print('After Stopword Removal:', filtered)
-print('After Stemming:', [PorterStemmer().stem(w) for w in filtered])
-print('After Lemmatization:', [WordNetLemmatizer().lemmatize(w) for w in filtered])
-print('POS Tags:', pos_tag(tokens))</pre></div></article>
+
+# Download resources (run once)
+nltk.download('punkt_tab')
+nltk.download('stopwords')
+nltk.download('wordnet')
+nltk.download('averaged_perceptron_tagger_eng')
+
+# Sample text
+text = "The striped bats are hanging on their feet for best"
+
+# Tokenize
+tokens = word_tokenize(text)
+print("Original Tokens:", tokens)
+
+# a. Stopword Elimination
+stop_words = set(stopwords.words('english'))
+filtered = [w for w in tokens if w.lower() not in stop_words]
+print("After Stopword Removal:", filtered)
+
+# b. Stemming
+ps = PorterStemmer()
+stemmed = [ps.stem(w) for w in filtered]
+print("After Stemming:", stemmed)
+
+# c. Lemmatization
+lemmatizer = WordNetLemmatizer()
+lemmatized = [lemmatizer.lemmatize(w) for w in filtered]
+print("After Lemmatization:", lemmatized)
+
+# d. POS Tagging
+pos_tags = pos_tag(tokens)
+print("POS Tags:", pos_tags)</pre></div></article>
   </section><div class="empty" id="empty">No experiments match that search.</div></main>
   <footer>Python experiments • ready to copy and run</footer>
   <script>

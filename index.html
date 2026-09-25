@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Python Experiments</title>
+  <style>
+    :root { --bg:#202124; --surface:#292a2d; --code:#1e1f20; --ink:#e8eaed; --muted:#bdc1c6; --line:#45474b; --blue:#8ab4f8; }
+    * { box-sizing:border-box } body { margin:0; color:var(--ink); font:15px/1.5 "Google Sans",Roboto,Arial,sans-serif; background:var(--bg); }
+    header { max-width:1200px; margin:auto; padding:48px 24px 24px; display:flex; gap:24px; align-items:end; justify-content:space-between; } .eyebrow { color:var(--blue); font-weight:700; letter-spacing:.1em; text-transform:uppercase; font-size:.72rem; } h1 { font-size:clamp(2rem,5vw,3.25rem); line-height:1.08; font-weight:500; letter-spacing:-.04em; margin:.45rem 0 0; }
+    .search { width:min(100%,340px); position:relative } input { width:100%; color:var(--ink); background:#303134; border:1px solid var(--line); border-radius:8px; padding:12px 15px 12px 40px; outline:none; font:inherit; } input:focus { border-color:var(--blue); box-shadow:0 0 0 1px var(--blue); } .search::before { content:'⌕'; position:absolute; left:14px; top:7px; color:var(--muted); font-size:1.4rem; }
+    main { max-width:1200px; margin:auto; padding:10px 24px 64px; } .grid { display:flex; flex-direction:column; gap:12px; }
+    article { display:grid; grid-template-columns:230px 215px minmax(0,1fr); align-items:stretch; background:var(--surface); border:1px solid var(--line); border-radius:10px; overflow:hidden; transition:border-color .18s; } article:hover { border-color:#747775; } .num { color:var(--blue); font-weight:700; font-size:.72rem; letter-spacing:.08em; } .card-top { padding:20px; display:flex; flex-direction:column; justify-content:center; } h2 { margin:4px 0 0; font-size:1.08rem; font-weight:500; letter-spacing:0; }
+    .block { border-left:1px solid var(--line); background:var(--code); min-width:0; } .label { padding:10px 14px 0; display:flex; align-items:center; justify-content:space-between; color:var(--muted); text-transform:uppercase; font-weight:700; font-size:.64rem; letter-spacing:.1em; } pre { margin:0; padding:8px 14px 14px; overflow:auto; color:#e8eaed; font:12.5px/1.55 "Roboto Mono","Cascadia Code",Consolas,monospace; white-space:pre; } .install { background:#25262a; } .install pre { color:#9ee6b2; }
+    .kw { color:#c58af9; font-weight:700; } .lib { color:#f7c66d; font-weight:700; } .module { color:#81d4fa; } .cls { color:#c9a7ff; font-weight:700; } .method { color:#80cbc4; } .fn { color:#8ab4f8; } .value { color:#ffab91; } .var { color:#f48fb1; } .comment { color:#8eab9d; font-style:italic; } .str { color:#a5d6a7; }
+    button { color:#202124; background:var(--blue); border:0; border-radius:4px; cursor:pointer; font:700 .68rem/1 "Google Sans",Roboto,Arial,sans-serif; padding:7px 9px; letter-spacing:.02em; } button:hover { background:#aecbfa; } .code-copy { background:#c2e7ff; } .empty { text-align:center; padding:80px 20px; color:var(--muted); display:none; } footer { text-align:center; color:var(--muted); padding:0 24px 40px; font-size:.85rem; } @media(max-width:760px){ header{padding-top:35px;display:block}.search{margin-top:24px;width:100%} article{display:block}.block{border-left:0;border-top:1px solid var(--line)} }
+  </style>
+</head>
+<body>
+  <header><div><div class="eyebrow">Python Lab Collection</div><h1>10 practical experiments.</h1></div><label class="search"><input id="search" placeholder="Search experiments…" aria-label="Search experiments" /></label></header>
+  <main><section class="grid" id="grid">
+    <article data-search="numpy built in functions array zeros ones full arange eye linspace random"><div class="card-top"><div class="num">EXPERIMENT 01</div><h2>NumPy Built-in Functions</h2></div><div class="block install"><div class="label">Install <button data-copy="pip install numpy">Copy</button></div><pre>pip install numpy</pre></div><div class="block"><div class="label">Program <button class="code-copy" data-target="code1">Copy code</button></div><pre id="code1">import numpy as np
+
+# array()
+a = np.array([1, 2, 3])
+print("Array:", a)
+
+# zeros()
+b = np.zeros((2, 3))
+print("Zeros:\n", b)
+
+# ones()
+c = np.ones((3, 2))
+print("Ones:\n", c)
+
+# full()
+d = np.full((2, 2), 7)
+print("Full:\n", d)
+
+# arange()
+e = np.arange(0, 10, 2)
+print("Arange:", e)
+
+# eye()
+f = np.eye(3)
+print("Eye:\n", f)
+
+# linspace()
+g = np.linspace(0, 1, 5)
+print("Linspace:", g)
+
+# random()
+h = np.random.rand(2, 2)
+print("Random:\n", h)</pre></div></article>
+    <article data-search="pandas data operations dataframe groupby merge concatenate"><div class="card-top"><div class="num">EXPERIMENT 02</div><h2>Pandas Data Operations</h2></div><div class="block install"><div class="label">Install <button data-copy="pip install pandas">Copy</button></div><pre>pip install pandas</pre></div><div class="block"><div class="label">Program <button class="code-copy" data-target="code2">Copy code</button></div><pre id="code2">import pandas as pd
+data = {'Name':['Alice','Bob','Charlie','David'], 'Age':[25,30,35,40], 'Department':['HR','IT','Finance','IT']}
+df = pd.DataFrame(data)
+print(df.head()); df.info()
+print(df['Name']); print(df.loc[1]); print(df.iloc[2])
+df['Salary'] = [50000,60000,55000,65000]
+df = df.rename(columns={'Department':'Dept'})
+print(df)
+print(df.groupby('Dept')['Salary'].mean())
+df2 = pd.DataFrame({'Name':['Alice','David'], 'Project':['X','Y']})
+print(pd.merge(df, df2, on='Name', how='left'))
+df3 = pd.DataFrame({'Name':['Eva'], 'Age':[28], 'Dept':['HR'], 'Salary':[52000]})
+print(pd.concat([df, df3], ignore_index=True))</pre></div></article>
+    <article data-search="pandas handling missing data null nan fillna slicing"><div class="card-top"><div class="num">EXPERIMENT 03</div><h2>Handling Missing Data</h2></div><div class="block install"><div class="label">Install <button data-copy="pip install pandas numpy">Copy</button></div><pre>pip install pandas numpy</pre></div><div class="block"><div class="label">Program <button class="code-copy" data-target="code3">Copy code</button></div><pre id="code3">import pandas as pd
+import numpy as np
+data = {'Name':['Alice','Bob','Carol','David','Eve'], 'Age':[25,np.nan,30,np.nan,28], 'Gender':['Female','Male','Female','Male','Female']}
+df = pd.DataFrame(data)
+print("Original Data:\n", df)
+print("\nMissing Values:\n", df.isnull().sum())
+df['Age'] = df['Age'].fillna(df['Age'].mean())
+sliced_df = df.iloc[0:2]
+print("\nCleaned Data:\n", df)
+print("\nSliced Data (First 2 Rows):\n", sliced_df)</pre></div></article>
+    <article data-search="categorical encoding pandas sklearn label encoder one hot"><div class="card-top"><div class="num">EXPERIMENT 04</div><h2>Categorical Encoding</h2></div><div class="block install"><div class="label">Install <button data-copy="pip install pandas scikit-learn">Copy</button></div><pre>pip install pandas scikit-learn</pre></div><div class="block"><div class="label">Program <button class="code-copy" data-target="code4">Copy code</button></div><pre id="code4">import pandas as pd
+from sklearn.preprocessing import LabelEncoder
+df = pd.DataFrame({'City':['Paris','London','Berlin','Paris']})
+le = LabelEncoder()
+df['City_Label'] = le.fit_transform(df['City'])
+df_onehot = pd.get_dummies(df['City'], prefix='City', dtype=int)
+df_final = pd.concat([df, df_onehot], axis=1)
+print(df_final)</pre></div></article>
+    <article data-search="data normalization standardscaler minmaxscaler pandas sklearn"><div class="card-top"><div class="num">EXPERIMENT 05</div><h2>Data Normalization</h2></div><div class="block install"><div class="label">Install <button data-copy="pip install pandas scikit-learn">Copy</button></div><pre>pip install pandas scikit-learn</pre></div><div class="block"><div class="label">Program <button class="code-copy" data-target="code5">Copy code</button></div><pre id="code5">import pandas as pd
+from sklearn.preprocessing import StandardScaler, MinMaxScaler
+df = pd.DataFrame({'Marks':[40,60,70,90]})
+df['Standardized'] = StandardScaler().fit_transform(df[['Marks']])
+df['Normalized'] = MinMaxScaler().fit_transform(df[['Marks']])
+print(df)</pre></div></article>
+    <article data-search="matplotlib charts line bar histogram pandas"><div class="card-top"><div class="num">EXPERIMENT 06</div><h2>Basic Matplotlib Charts</h2></div><div class="block install"><div class="label">Install <button data-copy="pip install matplotlib pandas">Copy</button></div><pre>pip install matplotlib pandas</pre></div><div class="block"><div class="label">Program <button class="code-copy" data-target="code6">Copy code</button></div><pre id="code6">import matplotlib.pyplot as plt
+import pandas as pd
+df = pd.DataFrame({'Year':[2018,2019,2020,2021], 'Sales':[100,120,140,160]})
+plt.plot(df['Year'], df['Sales'], marker='o'); plt.title('Yearly Sales Line Plot'); plt.xlabel('Year'); plt.ylabel('Sales'); plt.grid(True); plt.show()
+plt.bar(df['Year'], df['Sales'], color='green'); plt.title('Sales Bar Chart'); plt.xlabel('Year'); plt.ylabel('Sales'); plt.show()
+ages = [22,25,30,28,22,24,27,29,32,31]
+plt.hist(ages, bins=5, color='skyblue', edgecolor='black'); plt.title('Age Distribution'); plt.xlabel('Age'); plt.ylabel('Frequency'); plt.show()</pre></div></article>
+    <article data-search="seaborn visualization boxplot countplot pandas matplotlib"><div class="card-top"><div class="num">EXPERIMENT 07</div><h2>Seaborn Visualizations</h2></div><div class="block install"><div class="label">Install <button data-copy="pip install seaborn pandas matplotlib">Copy</button></div><pre>pip install seaborn pandas matplotlib</pre></div><div class="block"><div class="label">Program <button class="code-copy" data-target="code7">Copy code</button></div><pre id="code7">import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+df = pd.DataFrame({'Gender':['Male','Female','Female','Male','Female'], 'Marks':[70,85,78,90,88]})
+sns.boxplot(data=df, x='Gender', y='Marks'); plt.title('Boxplot of Marks by Gender'); plt.show()
+sns.countplot(data=df, x='Gender'); plt.title('Gender Distribution'); plt.show()</pre></div></article>
+    <article data-search="advanced matplotlib pie scatter multiple plots"><div class="card-top"><div class="num">EXPERIMENT 08</div><h2>Advanced Matplotlib Plots</h2></div><div class="block install"><div class="label">Install <button data-copy="pip install matplotlib">Copy</button></div><pre>pip install matplotlib</pre></div><div class="block"><div class="label">Program <button class="code-copy" data-target="code8">Copy code</button></div><pre id="code8">import matplotlib.pyplot as plt
+labels = ['Python','Java','C++','JavaScript']; sizes = [215,130,245,210]
+plt.pie(sizes, labels=labels, autopct='%1.1f%%', startangle=140); plt.title('Programming Language Popularity'); plt.axis('equal'); plt.show()
+x = [1,2,3,4,5]; y = [10,20,25,30,35]
+plt.scatter(x, y, color='red'); plt.title('Scatter Plot Example'); plt.xlabel('X-axis'); plt.ylabel('Y-axis'); plt.show()
+fig, axs = plt.subplots(1,2,figsize=(10,4)); axs[0].plot(x,y); axs[0].set_title('Line Plot'); axs[1].bar(x,y); axs[1].set_title('Bar Chart'); plt.tight_layout(); plt.show()</pre></div></article>
+    <article data-search="networkx graph algorithms shortest path centrality matplotlib"><div class="card-top"><div class="num">EXPERIMENT 09</div><h2>NetworkX Graph Algorithms</h2></div><div class="block install"><div class="label">Install <button data-copy="pip install networkx matplotlib">Copy</button></div><pre>pip install networkx matplotlib</pre></div><div class="block"><div class="label">Program <button class="code-copy" data-target="code9">Copy code</button></div><pre id="code9">import networkx as nx
+import matplotlib.pyplot as plt
+G = nx.Graph()
+G.add_edges_from([('A','B'),('A','C'),('B','D'),('C','D'),('D','E')])
+nx.draw(G, with_labels=True, node_color='lightblue', edge_color='gray'); plt.title('Graph Visualization'); plt.show()
+print('Shortest Path from A to E:', nx.shortest_path(G, source='A', target='E'))
+print('Degree Centrality:', nx.degree_centrality(G))
+print('Betweenness Centrality:', nx.betweenness_centrality(G))
+print('Closeness Centrality:', nx.closeness_centrality(G))</pre></div></article>
+    <article data-search="nltk text preprocessing tokenize stopwords stemming lemmatization pos"><div class="card-top"><div class="num">EXPERIMENT 10</div><h2>NLTK Text Preprocessing</h2></div><div class="block install"><div class="label">Install <button data-copy="pip install nltk">Copy</button></div><pre>pip install nltk</pre></div><div class="block"><div class="label">Program <button class="code-copy" data-target="code10">Copy code</button></div><pre id="code10">import nltk
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+from nltk.stem import PorterStemmer, WordNetLemmatizer
+from nltk import pos_tag
+
+# Download resources (run once)
+nltk.download('punkt_tab')
+nltk.download('stopwords')
+nltk.download('wordnet')
+nltk.download('averaged_perceptron_tagger_eng')
+
+# Sample text
+text = "The striped bats are hanging on their feet for best"
+
+# Tokenize
+tokens = word_tokenize(text)
+print("Original Tokens:", tokens)
+
+# a. Stopword Elimination
+stop_words = set(stopwords.words('english'))
+filtered = [w for w in tokens if w.lower() not in stop_words]
+print("After Stopword Removal:", filtered)
+
+# b. Stemming
+ps = PorterStemmer()
+stemmed = [ps.stem(w) for w in filtered]
+print("After Stemming:", stemmed)
+
+# c. Lemmatization
+lemmatizer = WordNetLemmatizer()
+lemmatized = [lemmatizer.lemmatize(w) for w in filtered]
+print("After Lemmatization:", lemmatized)
+
+# d. POS Tagging
+pos_tags = pos_tag(tokens)
+print("POS Tags:", pos_tags)</pre></div></article>
+  </section><div class="empty" id="empty">No experiments match that search.</div></main>
+  <footer>Python experiments • ready to copy and run</footer>
+  <script>
+    document.querySelectorAll('[data-copy]').forEach(button => button.addEventListener('click', () => copy(button, button.dataset.copy)));
+    document.querySelectorAll('[data-target]').forEach(button => button.addEventListener('click', () => copy(button, document.getElementById(button.dataset.target).textContent)));
+    function copy(button, value) {
+      const done = () => { const old = button.textContent; button.textContent = 'Copied!'; setTimeout(() => button.textContent = old, 1300); };
+      if (navigator.clipboard) navigator.clipboard.writeText(value).then(done);
+      else { const area = document.createElement('textarea'); area.value = value; document.body.append(area); area.select(); document.execCommand('copy'); area.remove(); done(); }
+    }
+    const keywords = new Set(['import','from','as','for','in','if','not','else','return','with','and','or']);
+    const libraries = new Set(['numpy','pandas','sklearn','matplotlib','seaborn','networkx','nltk']);
+    const modules = new Set(['pyplot','preprocessing','corpus','tokenize','stem']);
+    const classes = new Set(['DataFrame','LabelEncoder','StandardScaler','MinMaxScaler','Graph','PorterStemmer','WordNetLemmatizer']);
+    const methods = new Set(['array','zeros','ones','full','arange','eye','linspace','rand','head','info','loc','iloc','rename','groupby','mean','merge','concat','isnull','sum','fillna','get_dummies','fit_transform','plot','title','xlabel','ylabel','grid','show','bar','hist','boxplot','countplot','pie','axis','scatter','subplots','set_title','tight_layout','add_edges_from','draw','shortest_path','degree_centrality','betweenness_centrality','closeness_centrality','download','words','lower','stem','lemmatize']);
+    const functions = new Set(['print','set','len']);
+    const variables = new Set(['a','b','c','d','e','f','g','h','np','pd','df','df2','df3','df_onehot','df_final','data','grouped','merged_df','concat_df','sliced_df','le','scaler_std','scaler_mm','plt','sns','nx','G','x','y','fig','axs','labels','sizes','ages','text','tokens','filtered','ps','lemmatizer','pos_tags','stop_words']);
+    const escape = value => value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    document.querySelectorAll('pre[id^="code"]').forEach(code => {
+      code.innerHTML = escape(code.textContent).replace(/(#[^\n]*|'[^'\n]*'|"[^"\n]*"|\b\d+(?:\.\d+)?\b|\b[A-Za-z_]\w*\b)/g, token => {
+        if (token.startsWith('#')) return `<span class="comment">${token}</span>`;
+        if (token.startsWith("'") || token.startsWith('"')) return `<span class="str">${token}</span>`;
+        if (/^\d/.test(token) || ['True','False','None'].includes(token)) return `<span class="value">${token}</span>`;
+        if (keywords.has(token)) return `<span class="kw">${token}</span>`;
+        if (libraries.has(token)) return `<span class="lib">${token}</span>`;
+        if (modules.has(token)) return `<span class="module">${token}</span>`;
+        if (classes.has(token)) return `<span class="cls">${token}</span>`;
+        if (methods.has(token)) return `<span class="method">${token}</span>`;
+        if (functions.has(token)) return `<span class="fn">${token}</span>`;
+        if (variables.has(token)) return `<span class="var">${token}</span>`;
+        return token;
+      });
+    });
+    const cards = [...document.querySelectorAll('article')], empty = document.querySelector('#empty');
+    document.querySelector('#search').addEventListener('input', e => { let shown=0, q=e.target.value.toLowerCase(); cards.forEach(c => { const hit=c.dataset.search.includes(q); c.style.display=hit?'':'none'; shown+=hit; }); empty.style.display=shown?'none':'block'; });
+  </script>
+</body>
+</html>
